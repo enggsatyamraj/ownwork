@@ -7,7 +7,7 @@ exports.uploadJson = async (req, res) => {
     // write a function to genrater a unique url combinig the number and alphabets
     const url = Math.random().toString(36).substring(2, 14);
     console.log(url);
-    const fullurl = `http://localhost:${process.env.PORT}/api/json/${url}`;
+    const fullurl = `http://localhost:${process.env.PORT}/api/v1/showjson?url=${url}`;
     console.log(fullurl);
     const newJsonData = new JSON({ fullurl, jsonContent });
     await newJsonData.save();
