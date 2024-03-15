@@ -1,13 +1,16 @@
-const JSON = require("../models/jsonmodel.model");
+const JSON = require('../models/jsonmodel.model')
 
 exports.showjson = async (req, res) => {
   try {
-    const { url } = req.params;
+    const { url } = req.params; // Change to req.params to retrieve URL parameter
+    console.log("this is the req.params ...............", req.params)
     const jsonData = await JSON.findOne({ url });
+    console.log("this is the url sir sjkdnjasn.inside.showjson......................................", url)
     if (!jsonData) {
       return res.status(403).json({
         success: false,
-        message: "No such url found",
+        message: "No such url found inside.showjson",
+        url: url
       });
     }
     return res.status(200).json(jsonData.jsonContent);
@@ -20,34 +23,31 @@ exports.showjson = async (req, res) => {
   }
 };
 
-exports.showjsonByQuery = async (req, res) => {
+exports.showIndividualJson = async (req, res) => {
   try {
     const { url, id } = req.params;
-
-    // const jsonData = await JSON.findOne({$or: [{url}, {_id: id}]});
+    console.log("this is the req.params ...............", req.params)
     const jsonData = await JSON.findOne({ url });
-
+    console.log("this is the jsonData...........", jsonData)
+    
     if (!jsonData) {
       return res.status(403).json({
         success: false,
-        message: "No such url found",
+        message: "No such URL found",
+        url: url
       });
     }
-    if (id) {
-      const selectedItem = jsonData.jsonContent.find(
-        (item) => item.id.toString() === id
-      );
-      if (!selectedItem) {
-        return res.status(403).json({
-          success: false,
-          message: "No such id found",
-        });
-      } else {
-        return res.status(200).json(selectedItem);
-      }
-    } else {
-      return res.status(200).json(jsonData.jsonContent);
+
+    const individualData = jsonData.jsonContent.find(item => item.id == id);
+    if (!individualData) {
+      return res.status(404).json({
+        success: false,
+        message: "No such data entry found",
+        id: id
+      });
     }
+    
+    return res.status(200).json(individualData);
   } catch (err) {
     return res.status(500).json({
       success: false,

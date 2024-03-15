@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const jsonSchema = new mongoose.Schema({
-  fullurl: {
+  url: {
     type: String,
     required: true
   },
