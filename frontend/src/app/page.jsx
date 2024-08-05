@@ -1,4 +1,5 @@
 "use client";
+import SchemaBasedJSONCreator from "@/components/SchemaBasedJSONCreator";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -166,6 +167,7 @@ function App() {
             </ul>
           </div>
         </div>
+        <SchemaBasedJSONCreator />
       </div>
       <Toaster />
     </>
