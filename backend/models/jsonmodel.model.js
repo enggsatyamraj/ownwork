@@ -1,18 +1,17 @@
-
-
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const jsonSchema = new mongoose.Schema({
   url: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
   },
   jsonContent: {
     type: mongoose.Schema.Types.Mixed,
-    required: true
-  }
+    required: true,
+  },
 });
 
-const JSONModel = mongoose.model('JSONModel', jsonSchema);
+const JSONModel = mongoose.model("JSONModel", jsonSchema);
 
 module.exports = JSONModel;
